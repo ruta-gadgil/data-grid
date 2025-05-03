@@ -1,0 +1,28 @@
+{
+  "name": "@data-grid/api",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "targets": {
+      "serve": {
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@data-grid/api:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@data-grid/api:build:development"
+          },
+          "production": {
+            "buildTarget": "@data-grid/api:build:production"
+          }
+        }
+      }
+    }
+  }
+}
