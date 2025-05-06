@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { ColumnType, ColumnTypes, Table, User } from "../interfaces/interfaces";
-import './app.module.scss'
+import { ColumnTypes, Table, User } from "../interfaces/interfaces";
+import styles from './DataGrid.module.scss';
 import { fetchTableData, fetchUsers } from "./apiClient";
+import TableBody from "./TableBody/TableBody";
+import TableHeader from "./TableHeader/TableHeader";
 
 export default function DataGrid() {
     const [tableData, setTableData] = useState<Table|null>(null);
@@ -29,50 +31,18 @@ export default function DataGrid() {
             setLoading(false);
           }
         };
-
         loadData();
       }, []);
 
       if (loading) return <div>Loading...</div>;
 
-      const renderTableHeader = (tableColumns: ColumnType[]) => {
-        return <thead><tr>{tableColumns.map((entry, headerId) => {
-            return <th key={headerId}>{entry.name}</th>
-        })}</tr></thead>
-      }
-
-
   return (
-    <div className="data-grid">
+    <div>
       {tableData && columnTypeMap && 
-      <table>
-        {renderTableHeader(tableData.columns)}
-        <tbody>{tableData.rowData.map((entry, rowId) => {
-            return <tr key={rowId}>{Object.keys(entry).map((key, id) => {
-                console.log(key, columnTypeMap[key])
-                let additionalClassNames;
-                switch(columnTypeMap[key]) {
-                    case ColumnTypes.Link:
-                        additionalClassNames = 'link';
-                        return <td key={id} className={additionalClassNames}><a href={entry[key]}>{entry[key]}</a></td>;
-                    case ColumnTypes.Tag:
-                        additionalClassNames = 'tag';
-                        return <td key={id} className={additionalClassNames}>{entry[key]}</td>;
-                    case ColumnTypes.Num:
-                        additionalClassNames = 'num';
-                        return <td key={id} className={additionalClassNames}>{entry[key]}</td>;
-                    case ColumnTypes.Str:
-                        additionalClassNames = 'str';
-                        return <td key={id} className={additionalClassNames}>{entry[key]}</td>;
-                    default:
-                        console.log('Error in column type');
-                        return <td key={id}>Error displaying data</td>
-                }
-                
-                
-            })}</tr>
-        })}</tbody>
-      </table>
+        <table className={styles.dataGridTable}>
+            <TableHeader columns={tableData.columns} />
+            <TableBody rowData={tableData.rowData} columnTypeMap={columnTypeMap}></TableBody>
+        </table>
       }
       <h2>Users</h2>
       <ul>
