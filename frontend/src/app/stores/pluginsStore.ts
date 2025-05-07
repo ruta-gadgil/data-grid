@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { ColumnTypes } from '../interfaces/interfaces';
+import { ColumnTypes } from '../../interfaces/interfaces';
 
 // Define the types for our cell renderers and editors
 export interface CellRendererProps {
   value: any;
   rowId: number;
   colId: number;
+  columnType: ColumnTypes;
 //   row: Record<string, any>;
 //   column: Column;
 //   rowIndex: number;
@@ -41,8 +42,8 @@ interface PluginsState {
   registerCellEditor: (type: string, editor: CellEditor) => void;
   unregisterCellRenderer: (type: string) => void;
   unregisterCellEditor: (type: string) => void;
-  getCellRenderer: (type: string) => CellRenderer | undefined;
-  getCellEditor: (type: string) => CellEditor | undefined;
+  getCellRenderer: (type: string) => CellRenderer ;
+  getCellEditor: (type: string) => CellEditor ;
 }
 
 // Create the store with immer for immutable updates

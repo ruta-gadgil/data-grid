@@ -4,28 +4,34 @@ import styles from './DataGrid.module.scss';
 import { fetchTableData, fetchUsers } from "./apiClient";
 import TableBody from "./TableBody/TableBody";
 import TableHeader from "./TableHeader/TableHeader";
-import { initializePlugins } from "./initPlugins";
+import { initializePlugins } from "./stores/initPlugins";
+import { useGridStore } from "./stores/gridStore";
 
 export default function DataGrid() {
-    const [tableData, setTableData] = useState<Table|null>(null);
-    const [columnTypeMap, setColumnTypeMap] = useState<{[key: string]: ColumnTypes}|null>(null)
+    // const [tableData, setTableData] = useState<Table|null>(null);
+    // const [columnTypeMap, setColumnTypeMap] = useState<{[key: string]: ColumnTypes}|null>(null)
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
 
+    const { data, columns, setColumns, setColumnTypeMap, setData } = useGridStore();
+      
     useEffect(() => {
+      
         const loadData = async () => {
           try {
             const [tableData, usersData] = await Promise.all([
               fetchTableData(),
               fetchUsers(),
             ]);
-            setTableData(tableData);
-            setUsers(usersData);
+            setData(tableData.rowData);
+            setColumns(tableData.columns);
             const myMap: {[key: string]: ColumnTypes} = {}
             tableData.columns.forEach((entry) => {
                 myMap[entry.name] = entry.type;
             });
-            setColumnTypeMap(myMap)
+            setColumnTypeMap(myMap);
+
+            setUsers(usersData);
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
@@ -34,16 +40,16 @@ export default function DataGrid() {
         };
         initializePlugins();
         loadData();
-      }, []);
+      }, [setColumns,setColumnTypeMap, setData]);
 
       if (loading) return <div>Loading...</div>;
 
   return (
     <div>
-      {tableData && columnTypeMap && 
+      {data  && 
         <table className={styles.dataGridTable}>
-            <TableHeader columns={tableData.columns} />
-            <TableBody rowData={tableData.rowData} columnTypeMap={columnTypeMap}></TableBody>
+            <TableHeader/>
+            <TableBody />
         </table>
       }
       <h2>Users</h2>

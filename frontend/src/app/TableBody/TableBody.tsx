@@ -1,31 +1,31 @@
-import { ColumnTypes } from "../../interfaces/interfaces";
+import { useGridStore } from "../stores/gridStore";
 import Cell from "./Cell";
 
-interface TableBodyProps {
-    rowData: [];
-    columnTypeMap: {[key: string]: ColumnTypes}
-}
+export default function TableBody () {
 
-export default function TableBody ({rowData, columnTypeMap}: TableBodyProps) {
-    const updateCell = (rowId: number, colId: number, newValue: any) => {
+    const { data, columnTypeMap, updateCell } = useGridStore();
+    console.log(data);
+    const updateValue = (rowId: number, colId: number, newValue: any) => {
         console.log('TableBody: updating cell at', rowId, colId);
-        console.log('TableBody:updateCell: newValue', newValue)
+        console.log('TableBody:updateCell: newValue', newValue);
+        updateCell(rowId, colId, newValue);
     }
     return (
     <tbody>
-        {rowData.map((entry, rowId) => {
+        {data.map((entry, rowId) => {
         return <tr key={rowId} >{Object.keys(entry).map((key, colId) => {
             const columnType = columnTypeMap[key];
+            // console.log(`entry: ${entry}, key: ${key}`)
+            // fix type for tables row data
             const value = entry[key];
-            console.log(value)
+            // console.log(value)
             return (
             <Cell 
             rowId={rowId} 
-            row={entry} 
             colId={colId} 
             value={value} 
             columnType={columnType} 
-            onChange={updateCell} />  )
+            onChange={updateValue} />  )
         })}</tr>
     })}
     </tbody>

@@ -1,9 +1,7 @@
-import { ColumnType } from "../../interfaces/interfaces"
+import { useGridStore } from "../stores/gridStore";
 
-interface TableHeaderProps {
-    columns: ColumnType[];
-}
-export default function TableHeader({columns} : TableHeaderProps) {
+export default function TableHeader() {
+    const { columns } = useGridStore();
     return <thead><tr>{columns.map((entry, headerId) => {
         return <th key={headerId}>{entry.name}</th>
     })}</tr></thead>

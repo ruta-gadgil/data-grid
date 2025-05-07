@@ -1,4 +1,4 @@
-import { CellRendererProps } from '../../pluginsStore';
+import { CellRendererProps } from '../../stores/pluginsStore';
 import styles from './Tag.module.scss';
 
 export default function TagRenderer ({colId, value, onStartEdit}: CellRendererProps) {

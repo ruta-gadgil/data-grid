@@ -1,17 +1,16 @@
 import { memo, useState } from "react";
 
 import { ColumnTypes } from "../../interfaces/interfaces";
-import { usePluginsStore } from "../pluginsStore";
+import { usePluginsStore } from "../stores/pluginsStore";
 
 interface CellProps {
     rowId: number;
-    row: [];
     colId: number;
     value: any;
     columnType: ColumnTypes
     onChange: (rowId: number, colId: number, newValue: any) => void;
 }
-const Cell: React.FC<CellProps> = memo(({rowId, row, colId, value, columnType, onChange }) => {
+const Cell: React.FC<CellProps> = memo(({rowId, colId, value, columnType, onChange }) => {
     const [isEditing, setIsEditing] = useState(false);
     const { getCellRenderer, getCellEditor } = usePluginsStore();
 
@@ -29,9 +28,7 @@ const Cell: React.FC<CellProps> = memo(({rowId, row, colId, value, columnType, o
     }
 
     const handleChange = (newValue: any) => {
-        // onchange(newValue);
         console.log('Cell:handleChange: trying to update value, newValue: ', newValue)
-        setIsEditing(false);
         onChange(rowId, colId, newValue)
     }
  

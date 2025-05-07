@@ -1,4 +1,4 @@
-import { CellEditorProps } from "../../pluginsStore";
+import { CellEditorProps } from "../../stores/pluginsStore";
 
 export default function TextEditor({value, onChange, onSubmit, colId, columnType, rowId}: CellEditorProps) {
     return <td><input value={value} 

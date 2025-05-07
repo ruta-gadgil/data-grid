@@ -11,7 +11,7 @@ export interface ColumnType {
 
 export interface Table {
     columns: ColumnType[],
-    rowData: []
+    rowData: any[][]
 }
 
 export interface User {
