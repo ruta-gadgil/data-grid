@@ -1,9 +1,6 @@
+import { CellRendererProps } from '../../pluginsStore';
 import styles from './Tag.module.scss';
 
-interface TagRendererProps {
-    keyId: number;
-    value: string | number;
-}
-export default function TagRenderer ({keyId, value}: TagRendererProps) {
-    return <td key={keyId} className={styles.tag}>{value}</td>;
+export default function TagRenderer ({colId, value, onStartEdit}: CellRendererProps) {
+    return <td key={colId} className={styles.tag} onClick={onStartEdit}>{value}</td>;
 }

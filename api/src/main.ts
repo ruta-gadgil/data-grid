@@ -20,16 +20,24 @@ const users = [
 const tableData = {columns: [
   {name: 'ID', type: 'link'}, 
   {name: 'PlasmID', type: 'tag'},
-  {name: 'Volume', type: 'num'},
-  {name: 'Height', type: 'num'},
-  {name: 'Asignee', type: 'str'},
+  {name: 'TextColumn', type: 'text'}
+  // {name: 'Volume', type: 'num'},
+  // {name: 'Height', type: 'num'},
+  // {name: 'Asignee', type: 'str'},
 ], rowData: [
-  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag1', Volume: 1, Height: 1, Asignee: 'abc'},
-  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag2', Volume: 2, Height: 2, Asignee: 'def'},
-  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag3', Volume: 3, Height: 2, Asignee: 'ghi'},
-  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag4', Volume: 4, Height: 2, Asignee: 'jkl'},
-  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag5', Volume: 5, Height: 2, Asignee: 'mno'},
-  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag6', Volume: 6, Height: 2, Asignee: 'pqr'},
+  // {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag1', Volume: 1, Height: 1, Asignee: 'abc'},
+  // {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag2', Volume: 2, Height: 2, Asignee: 'def'},
+  // {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag3', Volume: 3, Height: 2, Asignee: 'ghi'},
+  // {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag4', Volume: 4, Height: 2, Asignee: 'jkl'},
+  // {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag5', Volume: 5, Height: 2, Asignee: 'mno'},
+  // {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag6', Volume: 6, Height: 2, Asignee: 'pqr'},
+
+  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag1', TextColumn: 'abc'},
+  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag2', TextColumn: 'def'},
+  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag3', TextColumn: 'ghi'},
+  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag4', TextColumn: 'jkl'},
+  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag5', TextColumn: 'mno'},
+  {ID: 'https://developer.mozilla.org/en-US/', PlasmID: 'Tag6', TextColumn: 'pqr'},
 ]}
 
 app.get('/api/users', (req, res) => {

@@ -1,7 +1,5 @@
-interface LinkRendererProps {
-    keyId: number;
-    value: string;
-}
-export default function LinkRenderer({keyId, value}: LinkRendererProps) {
-    return <td key={keyId}><a href={value}>{value}</a></td>;
+import { CellRendererProps } from "../../pluginsStore";
+
+export default function LinkRenderer({colId, value, onStartEdit}: CellRendererProps) {
+    return <td key={colId} onClick={onStartEdit}><a href={value}>{value}</a></td>;
 }

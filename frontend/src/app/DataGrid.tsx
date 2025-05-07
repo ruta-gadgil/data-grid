@@ -4,6 +4,7 @@ import styles from './DataGrid.module.scss';
 import { fetchTableData, fetchUsers } from "./apiClient";
 import TableBody from "./TableBody/TableBody";
 import TableHeader from "./TableHeader/TableHeader";
+import { initializePlugins } from "./initPlugins";
 
 export default function DataGrid() {
     const [tableData, setTableData] = useState<Table|null>(null);
@@ -31,6 +32,7 @@ export default function DataGrid() {
             setLoading(false);
           }
         };
+        initializePlugins();
         loadData();
       }, []);
 

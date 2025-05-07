@@ -1,5 +1,9 @@
 {
   "name": "@data-grid/frontend",
   "version": "0.0.1",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "immer": "^10.1.1",
+    "zustand": "^5.0.4"
+  }
 }
