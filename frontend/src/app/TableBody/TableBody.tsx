@@ -3,13 +3,11 @@ import Cell from "./Cell";
 
 export default function TableBody () {
 
-    const { data, columns, updateCell } = useGridStore();
+    const { data, columns, updateCell, saveToServer } = useGridStore();
 
-    const updateValue = (rowId: number, colId: number, newValue: string | number) => {
-        console.log('TableBody: updating cell at', rowId, colId);
-        console.log('TableBody:updateCell: newValue', newValue);
-        updateCell(rowId, colId, newValue);
-    }
+    // const updateValue = (rowId: number, colId: number, newValue: string | number) => {
+    //     updateCell(rowId, colId, newValue);
+    // }
     return (
     <tbody>
         {data.map((entry, rowId) => {
@@ -26,7 +24,8 @@ export default function TableBody () {
             colId={colId} 
             value={value} 
             columnType={columnType} 
-            onChange={updateValue} />  )
+            onChange={updateCell}
+            onSave={saveToServer} />  )
         })}</tr>
     })}
     </tbody>

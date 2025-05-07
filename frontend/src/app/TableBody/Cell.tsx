@@ -8,8 +8,9 @@ interface CellProps {
     value: string | number;
     columnType: string;
     onChange: (rowId: number, colId: number, newValue: string | number) => void;
+    onSave: (rowId: number, colId: number, newValue: string | number) => void;
 }
-const Cell: React.FC<CellProps> = memo(({rowId, colId, value, columnType, onChange }) => {
+const Cell: React.FC<CellProps> = memo(({rowId, colId, value, columnType, onChange, onSave }) => {
     const [isEditing, setIsEditing] = useState(false);
     const { getCellRenderer, getCellEditor } = usePluginsStore();
 
@@ -19,7 +20,6 @@ const Cell: React.FC<CellProps> = memo(({rowId, colId, value, columnType, onChan
     
     const handleStartEdit = () => {
         setIsEditing(true);
-        console.log('Cell:handleStartEdit: trying to update value')
     }
 
     const handleCloseEdit = () => {
@@ -27,27 +27,31 @@ const Cell: React.FC<CellProps> = memo(({rowId, colId, value, columnType, onChan
     }
 
     const handleChange = (newValue: string | number) => {
-        console.log('Cell:handleChange: trying to update value, newValue: ', newValue)
         onChange(rowId, colId, newValue)
     }
+
+    const handleSubmit = () => {
+        onSave(rowId, colId, value);
+        handleCloseEdit();
+    }
  
-    console.log('isEditing:', isEditing)
-    return (isEditing ?
-        <CellEditor 
-        rowId={rowId}
-        colId={colId} 
-        value={value}
-        columnType={columnType} 
-        onChange={handleChange}
-        onClose={handleCloseEdit} 
-        onSubmit={() => {handleChange(value)}} /> 
-        : <CellRenderer 
-        rowId={rowId} 
-        colId={colId} 
-        value={value} 
-        columnType={columnType} 
-        isEditing={isEditing} 
-        onStartEdit={handleStartEdit} />
+    return (
+            isEditing ?
+            <CellEditor
+            rowId={rowId}
+            colId={colId} 
+            value={value}
+            columnType={columnType} 
+            onChange={handleChange}
+            onClose={handleCloseEdit} 
+            onSubmit={handleSubmit} /> 
+            : <CellRenderer 
+            rowId={rowId} 
+            colId={colId} 
+            value={value} 
+            columnType={columnType} 
+            isEditing={isEditing} 
+            onStartEdit={handleStartEdit} />
     );
 });
 

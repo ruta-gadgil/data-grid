@@ -7,9 +7,10 @@ export interface GridState {
     columns: ColumnMetaData[];
     
     // Actions
-    setData: (data: string[][]) => void;
+    setData: (data: (string|number)[][]) => void;
     setColumns: (columns: ColumnMetaData[]) => void;
     updateCell: (rowIndex: number, colId: number, value: string | number) => void;
+    saveToServer: (rowIndex: number, colId: number, value: string | number) => void;
 }
 
 export const useGridStore = create<GridState>()(
@@ -34,8 +35,14 @@ export const useGridStore = create<GridState>()(
           state.data[rowIndex][colId] = value;
         }
       });
-      
-      // Optional: Trigger side effects like API calls
+    },
+
+    saveToServer: (rowIndex, colId, value) => {
+      set(state => {
+        if (state.data[rowIndex]) {
+          state.data[rowIndex][colId] = value;
+        }
+      });
       saveChangesToServer(rowIndex, colId, value);
     },
   }))
@@ -43,5 +50,5 @@ export const useGridStore = create<GridState>()(
 
 // Optional: Save changes to backend
 async function saveChangesToServer(rowIndex: number, columnId: number, value: string | number) {
-    console.log('saving to the server')
+    console.log('saving to the server! To implement a POST request to update the data on the server')
 }

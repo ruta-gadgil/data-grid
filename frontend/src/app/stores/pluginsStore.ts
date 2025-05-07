@@ -15,10 +15,10 @@ export interface CellEditorProps {
   rowId: number;
   colId: number;
   value: string | number;
+  columnType: string;
   onChange: (value: string) => void;
   onClose: () => void;
   onSubmit: () => void;
-  columnType: string;
 }
 
 export type CellRenderer = React.FC<CellRendererProps>;
