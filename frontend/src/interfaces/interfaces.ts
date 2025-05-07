@@ -1,17 +1,7 @@
-export enum ColumnTypes {
-    Tag = 'tag',
-    Link = 'link',
-    Num = 'num',
-    Str = 'str',
-}
-export interface ColumnType {
+export interface ColumnMetaData {
+    colId: number;
     name: string,
-    type: ColumnTypes
-}
-
-export interface Table {
-    columns: ColumnType[],
-    rowData: any[][]
+    type: string;
 }
 
 export interface User {

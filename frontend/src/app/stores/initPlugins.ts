@@ -5,6 +5,8 @@ import TagEditor from '../TableBody/Editors/TagEditor';
 import TextRenderer from '../TableBody/Renderers/TextRenderer';
 import LinkRenderer from '../TableBody/Renderers/LinkRenderer';
 import TagRenderer from '../TableBody/Renderers/TagRenderer';
+import NumRenderer from '../TableBody/Renderers/NumRenderer';
+import NumEditor from '../TableBody/Editors/NumEditor';
 
 export function initializePlugins() {
   const { 
@@ -16,9 +18,11 @@ export function initializePlugins() {
   registerCellRenderer('text', TextRenderer);
   registerCellRenderer('link', LinkRenderer);
   registerCellRenderer('tag', TagRenderer);
+  registerCellRenderer('num', NumRenderer);
   
   // Register default editors
   registerCellEditor('text', TextEditor);
   registerCellEditor('link', LinkEditor);
   registerCellEditor('tag', TagEditor);
+  registerCellEditor('num', NumEditor);
 }

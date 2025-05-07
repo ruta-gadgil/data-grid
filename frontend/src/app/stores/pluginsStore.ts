@@ -1,31 +1,24 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { ColumnTypes } from '../../interfaces/interfaces';
 
 // Define the types for our cell renderers and editors
 export interface CellRendererProps {
-  value: any;
   rowId: number;
   colId: number;
-  columnType: ColumnTypes;
-//   row: Record<string, any>;
-//   column: Column;
-//   rowIndex: number;
+  value: string | number;
+  columnType: string;
   isEditing: boolean;
   onStartEdit: () => void;
 }
 
 export interface CellEditorProps {
-  value: any;
-  onChange: (value: any) => void;
+  rowId: number;
+  colId: number;
+  value: string | number;
+  onChange: (value: string) => void;
   onClose: () => void;
   onSubmit: () => void;
-  colId: number;
-  columnType: ColumnTypes;
-  rowId: number;
-//   column: Column;
-//   row: Record<string, any>;
-//   rowIndex: number;
+  columnType: string;
 }
 
 export type CellRenderer = React.FC<CellRendererProps>;

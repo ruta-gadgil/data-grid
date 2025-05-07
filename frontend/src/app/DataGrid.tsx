@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ColumnTypes, Table, User } from "../interfaces/interfaces";
+import { User } from "../interfaces/interfaces";
 import styles from './DataGrid.module.scss';
 import { fetchTableData, fetchUsers } from "./apiClient";
 import TableBody from "./TableBody/TableBody";
@@ -8,12 +8,10 @@ import { initializePlugins } from "./stores/initPlugins";
 import { useGridStore } from "./stores/gridStore";
 
 export default function DataGrid() {
-    // const [tableData, setTableData] = useState<Table|null>(null);
-    // const [columnTypeMap, setColumnTypeMap] = useState<{[key: string]: ColumnTypes}|null>(null)
     const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
 
-    const { data, columns, setColumns, setColumnTypeMap, setData } = useGridStore();
+    const { data,  setColumns, setData } = useGridStore();
       
     useEffect(() => {
       
@@ -23,15 +21,10 @@ export default function DataGrid() {
               fetchTableData(),
               fetchUsers(),
             ]);
-            setData(tableData.rowData);
+            setData(tableData.data);
             setColumns(tableData.columns);
-            const myMap: {[key: string]: ColumnTypes} = {}
-            tableData.columns.forEach((entry) => {
-                myMap[entry.name] = entry.type;
-            });
-            setColumnTypeMap(myMap);
-
             setUsers(usersData);
+            
           } catch (error) {
             console.error('Error fetching data:', error);
           } finally {
@@ -40,7 +33,7 @@ export default function DataGrid() {
         };
         initializePlugins();
         loadData();
-      }, [setColumns,setColumnTypeMap, setData]);
+      }, [setColumns, setData]);
 
       if (loading) return <div>Loading...</div>;
 

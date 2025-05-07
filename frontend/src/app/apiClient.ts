@@ -1,8 +1,9 @@
-import { Table, User } from "../interfaces/interfaces";
+import {  User } from "../interfaces/interfaces";
+import { GridState } from "./stores/gridStore";
 
 const API_URL = 'http://localhost:3000/api';
 
-export const fetchTableData = async (): Promise<Table> => {
+export const fetchTableData = async (): Promise<GridState> => {
   const response = await fetch(`${API_URL}/tableData`);
   return response.json();
 };

@@ -1,24 +1,21 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { ColumnType, ColumnTypes } from '../../interfaces/interfaces';
+import { ColumnMetaData } from '../../interfaces/interfaces';
 
-interface GridState {
-    data: any[][];
-    columns: ColumnType[];
-    columnTypeMap: {[key: string]: ColumnTypes}
+export interface GridState {
+    data: (string|number)[][];
+    columns: ColumnMetaData[];
     
     // Actions
-    setData: (data: any[][]) => void;
-    setColumns: (columns: ColumnType[]) => void;
-    setColumnTypeMap: (columnTypeMap: {[key: string]: ColumnTypes}) => void;
-    updateCell: (rowIndex: number, colId: number, value: any) => void;
+    setData: (data: string[][]) => void;
+    setColumns: (columns: ColumnMetaData[]) => void;
+    updateCell: (rowIndex: number, colId: number, value: string | number) => void;
 }
 
 export const useGridStore = create<GridState>()(
     immer((set) => ({
     data: [],
     columns: [],
-    columnTypeMap: {},
     setData: (data) => {
         set((state) => {
             state.data = data;
@@ -28,12 +25,6 @@ export const useGridStore = create<GridState>()(
     setColumns: (columns) => {
         set((state) => {
             state.columns = columns;
-        })
-    },
-    
-    setColumnTypeMap: (columnTypeMap) => {
-        set((state) => {
-            state.columnTypeMap = columnTypeMap;
         })
     },
 
@@ -51,6 +42,6 @@ export const useGridStore = create<GridState>()(
 );
 
 // Optional: Save changes to backend
-async function saveChangesToServer(rowIndex: number, columnId: number, value: any) {
+async function saveChangesToServer(rowIndex: number, columnId: number, value: string | number) {
     console.log('saving to the server')
 }
