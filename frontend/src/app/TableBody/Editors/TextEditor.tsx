@@ -1,7 +1,7 @@
 import { CellEditorProps } from "../../stores/pluginsStore";
 import { useOutsideClick } from "../../customHooks/useComponentVisible";
 
-export default function TextEditor({value, onChange, onSubmit, colId, columnType, rowId}: CellEditorProps) {
+export default function TextEditor({value, onChange, onSubmit}: CellEditorProps) {
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
             onSubmit();
@@ -9,7 +9,8 @@ export default function TextEditor({value, onChange, onSubmit, colId, columnType
     }
     const ref = useOutsideClick(() => {
         onSubmit();
-      });
+    });
+
     return (
     <td>
         <div ref={ref}>

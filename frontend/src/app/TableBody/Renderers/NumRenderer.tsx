@@ -1,6 +1,8 @@
 import { CellRendererProps } from "../../stores/pluginsStore";
 
-export default function NumRenderer ({rowId, colId, value,onStartEdit}: CellRendererProps) {
-    // console.log(`NumRenderer:rowID:${rowId}, colId: ${colId}, value: ${value}`);
-    return <td key={colId} onClick={onStartEdit}>{value}</td>;
+interface NumRendererProps extends Omit<CellRendererProps, 'value'> {
+    value: number;
+}
+export default function NumRenderer ({value, onStartEdit}: NumRendererProps) {
+    return <td onClick={onStartEdit}>{value}</td>;
 }

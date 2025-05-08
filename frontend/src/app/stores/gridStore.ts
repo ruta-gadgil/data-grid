@@ -6,7 +6,6 @@ export interface GridState {
     data: (string|number)[][];
     columns: ColumnMetaData[];
     
-    // Actions
     setData: (data: (string|number)[][]) => void;
     setColumns: (columns: ColumnMetaData[]) => void;
     updateCell: (rowIndex: number, colId: number, value: string | number) => void;

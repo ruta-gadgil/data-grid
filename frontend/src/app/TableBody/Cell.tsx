@@ -38,16 +38,11 @@ const Cell: React.FC<CellProps> = memo(({rowId, colId, value, columnType, onChan
     return (
             isEditing ?
             <CellEditor
-            rowId={rowId}
-            colId={colId} 
             value={value}
-            columnType={columnType} 
             onChange={handleChange}
             onClose={handleCloseEdit} 
             onSubmit={handleSubmit} /> 
-            : <CellRenderer 
-            rowId={rowId} 
-            colId={colId} 
+            : <CellRenderer
             value={value} 
             columnType={columnType} 
             isEditing={isEditing} 

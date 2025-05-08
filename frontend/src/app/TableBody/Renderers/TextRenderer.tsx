@@ -1,8 +1,11 @@
 import { CellRendererProps } from "../../stores/pluginsStore";
 
-export default function TextRenderer ({rowId, colId, value, onStartEdit}: CellRendererProps) {
+interface TextRendererProps extends Omit<CellRendererProps, 'value'> {
+    value: string;
+}
+export default function TextRenderer ({ value, onStartEdit}: TextRendererProps) {
     return (
-    <td key={colId} onClick={onStartEdit}>
+    <td onClick={onStartEdit}>
         {value}
     </td>);
 }
