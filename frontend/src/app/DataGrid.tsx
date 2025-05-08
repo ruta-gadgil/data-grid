@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { User } from "../interfaces/interfaces";
 import styles from './DataGrid.module.scss';
-import { fetchTableData, fetchUsers } from "./apiClient";
+import { fetchTableData } from "./apiClient";
 import TableBody from "./TableBody/TableBody";
 import TableHeader from "./TableHeader/TableHeader";
 import { initializePlugins } from "./stores/initPlugins";
 import { useGridStore } from "./stores/gridStore";
 
 export default function DataGrid() {
-    const [users, setUsers] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string|null>(null);
 
     const { data,  setColumns, setData } = useGridStore();
       
@@ -17,16 +16,19 @@ export default function DataGrid() {
       
         const loadData = async () => {
           try {
-            const [tableData, usersData] = await Promise.all([
-              fetchTableData(),
-              fetchUsers(),
-            ]);
+            const tableData = await fetchTableData(); 
             setData(tableData.data);
             setColumns(tableData.columns);
-            setUsers(usersData);
+          } catch (error: unknown) {
+            if (error instanceof Error) {
+              setError(error.message);
+              console.error('Error fetching data table: ', error);
+            }
+            else {
+              setError(`Unknown error: ${error}`);
+              console.error(error)
+            }
             
-          } catch (error) {
-            console.error('Error fetching data:', error);
           } finally {
             setLoading(false);
           }
@@ -39,6 +41,7 @@ export default function DataGrid() {
 
   return (
     <div>
+      {error && <div>Unable to load the data grid. See console for detailed error message.</div>}
       {data  && 
         <table className={styles.dataGridTable}>
             <TableHeader/>

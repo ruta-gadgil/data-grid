@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { ColumnMetaData } from '../../interfaces/interfaces';
+import { ColumnMetaData, User } from '../../interfaces/interfaces';
 
 export interface GridState {
-    data: (string|number)[][];
+    data: (string|number|User[])[][];
     columns: ColumnMetaData[];
     
-    setData: (data: (string|number)[][]) => void;
+    setData: (data: (string|number|User[])[][]) => void;
     setColumns: (columns: ColumnMetaData[]) => void;
-    updateCell: (rowIndex: number, colId: number, value: string | number) => void;
-    saveToServer: (rowIndex: number, colId: number, value: string | number) => void;
+    updateCell: (rowIndex: number, colId: number, value: string | number | User[]) => void;
+    saveToServer: (rowIndex: number, colId: number, value: string | number | User[]) => void;
 }
 
 export const useGridStore = create<GridState>()(
@@ -48,6 +48,6 @@ export const useGridStore = create<GridState>()(
 );
 
 // Optional: Save changes to backend
-async function saveChangesToServer(rowIndex: number, columnId: number, value: string | number) {
-    console.log('saving to the server! To implement a POST request to update the data on the server')
+async function saveChangesToServer(rowIndex: number, columnId: number, value: string | number | User[]) {
+    console.log('saving to the server! To implement a POST request to update the data on the server. updates happening at: ', rowIndex, columnId, value)
 }

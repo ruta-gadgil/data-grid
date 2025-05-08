@@ -11,7 +11,7 @@ export interface CellRendererProps {
 
 export interface CellEditorProps {
     value: string | number | User[];
-    onChange: (value: string) => void;
+    onChange: (value: string | number | User[]) => void;
     onClose: () => void;
     onSubmit: () => void;
 }

@@ -6,15 +6,17 @@ interface UserRendererProps extends Omit<CellRendererProps, 'value'> {
 }
 export default function UserRenderer({value, onStartEdit}: UserRendererProps) {
     const users = value || [];
-
     return (
         <td onClick={onStartEdit}>
-            {users.map((user) => (
+            {users.length > 0 ? (
+            users.map((user) => (
                 <div key={user.id}>
                     <img src={user.avatar} alt={user.name} />
                     <p>{user.name}</p>
                 </div>
-            ))}
+            ))
+            ) : (<div>No Users assigned</div>)
+            }
         </td>
     );
 };
