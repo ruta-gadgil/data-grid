@@ -1,5 +1,6 @@
 import { useOutsideClick } from "../../customHooks/useComponentVisible";
 import { CellEditorProps } from "../../stores/pluginsStore";
+import styles from './Editor.module.scss';
 
 interface NumEditorProps extends Omit<CellEditorProps, 'value' | 'onChange'> {
     value: number;
@@ -17,15 +18,19 @@ export default function NumEditor({value, onChange, onSubmit}: NumEditorProps) {
 
     return (
     <td>
-        <div ref={ref}>
+        <div className={styles.numEditorContainer} ref={ref}>
             <input 
-            type="number"
+            className={styles.editorInput}
             value={value} 
+            autoFocus
             onChange={(e) => {
-                const newValue = e.target.value;
-                console.log('NumEditor: editing value, newValue:', newValue)
+                const newValue = parseInt(e.target.value);
                 if (typeof newValue === 'number' && !isNaN(newValue)) {
                     onChange(newValue);
+                }
+                // future enhancement: add an alert component to show this error
+                else {
+                    console.error(`${e.target.value}, ' is not a valid number input`)
                 }
             }}
             onKeyDown={handleKeyDown}>

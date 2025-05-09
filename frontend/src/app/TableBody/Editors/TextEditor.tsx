@@ -1,5 +1,6 @@
 import { CellEditorProps } from "../../stores/pluginsStore";
 import { useOutsideClick } from "../../customHooks/useComponentVisible";
+import styles from './Editor.module.scss';
 
 interface TextEditorProps extends Omit<CellEditorProps, 'value' | 'onChange'> {
     value: string;
@@ -17,9 +18,11 @@ export default function TextEditor({value, onChange, onSubmit}: TextEditorProps)
 
     return (
     <td>
-        <div ref={ref}>
-        <input 
+        <div className={styles.textEditorContainer} ref={ref}>
+        <input
+            className={styles.editorInput} 
             value={value} 
+            autoFocus
             onChange={(e) => {
                 const newValue = e.target.value;
                 onChange(newValue.toString());

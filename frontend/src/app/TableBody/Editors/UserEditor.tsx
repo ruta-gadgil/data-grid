@@ -3,7 +3,7 @@ import { useOutsideClick } from "../../customHooks/useComponentVisible";
 import { useEffect, useState } from "react";
 import { User } from "../../../interfaces/interfaces";
 import { useUsersStore } from "../../stores/usersStore";
-import styles from './UserEditor.module.scss';
+import styles from './Editor.module.scss';
 
 interface UserEditorProps extends Omit<CellEditorProps, 'value' | 'onChange'> {
     value: User[];
@@ -47,6 +47,7 @@ export default function UserEditor({value, onChange, onClose}: UserEditorProps) 
         <div ref={ref} className={styles.userEditorContainer}>
             <div>
                 <input
+                className={styles.userSearchInput}
                 type="text"
                 placeholder="Search users..."
                 value={searchQuery}
