@@ -1,90 +1,44 @@
 # DataGrid
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## How to run:
+1. Clone repository
+2. Navigate to data-grid
+3. Run command `npx nx serve frontend` to run the frontend at ‘localhost:4200’
+4. Run command `npx nx serve api` to run the api (listens on port 3000)
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## How to use: 
+1. Click on cell to update its value
+2. Only ‘return’ key and click outside to save new cell value
+Data contracts for api:
+    1. Users:
+        1. [{id: (unique num), email: ‘string’, avatar: ‘url’}, {id: (unique num), email: ‘string’, avatar: ‘url’}, …]
+    2. Grid:  
+        1. column types can be one of (link, tag, num, text, user)
+        2. tableData = {
+		    columns: [{colId: 0, name: '', type: ''}, {colId: 1, name: '', type: ''}, {colId: 2, name: '', type: ''}, ...]
+			data: [[], [], …]}
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Assumptions:
+Always assume that the backend will serve type checked values and follow contract for data. No type checking is performed at the default page. Basic type checking always happens only when saving updated values
 
-## Finish your remote caching setup
+## Design decision:
+1. Usage of zustand for state management of the grid data to make it pluggable
+2. Memoize Cell component
+3. Column types of link and tags are not editable
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/osJA9B3erK)
+## ToDo:
+1. Fix error: ‘Each child in a list should have a unique "key" prop’ on TableBody. 
+2. Unit testing, e2e testing
+3. Implement actual POST request to save data on the backend.
+4. Debouncing for on hover of additional users
+5. Add cohesive styling, currently the table jumps when switching to num and text editors
+6. Create shared libraries for types and data access to be used by frontend and api
+7. Add a database to save table data, users etc. to facilitate persisting updates to backend
 
-
-## Generate a library
-
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
-```
-
-## Run tasks
-
-To build the library use:
-
-```sh
-npx nx build pkg1
-```
-
-To run any task with Nx use:
-
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Future enhancements:
+1. Add pagination along with chunking of data to improve performance of larger datasets
+2. Consider virtualization to optimize performance 
+3. Add different colors for different tags
+4. Add alert component to display alert messages
+5. Add other table capabilities like sorting, ordering, adding new rows, deleting rows, moving rows, moving column etc.
+6. Unregister renderer/editor when component unmounts
