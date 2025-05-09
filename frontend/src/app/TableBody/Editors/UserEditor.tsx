@@ -44,7 +44,7 @@ export default function UserEditor({value, onChange, onClose}: UserEditorProps) 
 
     return (
     <td>
-        <div ref={ref}>
+        <div ref={ref} className={styles.userEditorContainer}>
             <div>
                 <input
                 type="text"
@@ -64,39 +64,38 @@ export default function UserEditor({value, onChange, onClose}: UserEditorProps) 
             )}
       
             <div className={styles.selectedUsers}>
+                <span>Assigned Users</span>
                 {selectedUsers.map(user => (
-                    <div key={user.id}>
-                        {user.name}
-                        <button onClick={() => toggleUser(user)}>×</button>
+                    <div className={styles.selectedUser} key={user.id}>
+                        <span>{user.name}</span>
+                        <button className={styles.btnDeleteSelected} onClick={() => toggleUser(user)}>×</button>
                     </div>
                 ))}
             </div>
       
-            <div>
+            <div className={styles.filteredUsers}>
+            <span>Add assignees...</span>
             {filteredUsers.length > 0 ? (
                 filteredUsers.map(user => {
                     // don't include users that are already slelected
-                    // will likely be ideal/optimal to include a separate list of available users to render
+                    // optimization to do: will likely be ideal/optimal to include a separate list of available users to render
                     if(!selectedUsers.find((u) => u.id === user.id)) {
-                        return (
-                        <div key={user.id} onClick={() => toggleUser(user)}>
-                            <img 
-                                src={user.avatar} 
-                                alt={user.name}
-                            />
-                            <span>{user.name}</span>
-                        </div>)
+                        return (    
+                            <div className={styles.filteredUser} key={user.id} onClick={() => toggleUser(user)}>
+                                <span>{user.name}</span>
+                            </div>
+                        )
                     } else {
                         return null;
                     }
                     })
                     ) : (
-                    <div>'No users found'</div>
+                    <div>No users found</div>
                 )}
             </div>
-            <div>
-                <button onClick={onClose}>Cancel</button>
-                <button onClick={handleSave}>Save</button>
+            <div className={styles.btnContainer}>
+                <button className={styles.btnCancel} onClick={onClose}>Cancel</button>
+                <button className={styles.btnSave} onClick={handleSave}>Save</button>
             </div>
         </div>
     </td>);

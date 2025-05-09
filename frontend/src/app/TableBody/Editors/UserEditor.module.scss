@@ -1,4 +1,78 @@
-// need to update, looks terrible!
+.userEditorContainer {
+    max-width: 250px;
+    position: absolute;
+    padding: 5px 25px 5px 5px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
 .selectedUsers {
-    background-color: blueviolet;
+    background-color: #f6f6f6;
+    width: 100%;
+    margin-top: 2px;
+    padding: 5px; 
+}
+
+.selectedUser {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: 1px solid #aaaaaa;
+}
+.btnDeleteSelected {
+    background-color: #f67d7d;
+    border: 1px solid red;
+    color: white;
+    border-radius: 4px;
+}
+
+.filteredUsers {
+   background-color: #ffffff;
+   width: 100%;
+   padding: 5px;
+   margin-top: 2px;
+}
+
+.filteredUser {
+    padding: 5px;
+    border-bottom: 1px solid #b9b9b9;
+}
+
+input {
+    /* Base styling */
+    width: 100%;
+    padding: 4px 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #ffffff;
+    
+    /* Border styling */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    
+    /* Remove default outline and add custom focus styling */
+    outline: none;
+    box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.0);
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+
+.btnCancel {
+    // background-color: #f67d7d;
+    border: 1px solid #727272;
+    // color: white;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btnSave {
+    background-color: #71a671;
+    border: 1px solid green;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
 }

@@ -1,0 +1,16 @@
+.tag {
+    padding: 4px 12px;
+    display: inline-flex;
+    font-size: 12px;
+    
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* Hover state */
+  .tag:hover {
+    background-color: #e5e5e5;
+    cursor: pointer;
+  }

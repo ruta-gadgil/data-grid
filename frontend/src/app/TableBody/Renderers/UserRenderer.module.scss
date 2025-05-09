@@ -1,0 +1,50 @@
+.userContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.visibleUsers {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.userDetails {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.userAvatar {
+    border-radius: 4px;
+}
+
+
+.hiddenUserCount {
+    border: 1px solid #ffc57e;
+    border-radius: 4px;
+    padding: 5px;
+    background-color: #ffe4c4;
+    cursor: pointer;
+}
+
+.hiddenUsers{
+    list-style: none;
+    padding-left: 0;
+    padding: 2px;
+    margin-top: 2px;
+    position: absolute;
+    background-color: #f0f0f0;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    .userDetails {
+        padding: 2px;
+        border-bottom: 1px solid #808080;
+    }
+}

@@ -1,7 +1,11 @@
 import { CellEditorProps } from "../../stores/pluginsStore";
 import { useOutsideClick } from "../../customHooks/useComponentVisible";
 
-export default function TextEditor({value, onChange, onSubmit}: CellEditorProps) {
+interface TextEditorProps extends Omit<CellEditorProps, 'value' | 'onChange'> {
+    value: string;
+    onChange: (value: string) => void;
+}
+export default function TextEditor({value, onChange, onSubmit}: TextEditorProps) {
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
             onSubmit();
@@ -18,7 +22,7 @@ export default function TextEditor({value, onChange, onSubmit}: CellEditorProps)
             value={value} 
             onChange={(e) => {
                 const newValue = e.target.value;
-                onChange(newValue);
+                onChange(newValue.toString());
             }}
             onKeyDown={handleKeyDown}>    
         </input>

@@ -28,7 +28,6 @@ const Cell: React.FC<CellProps> = memo(({rowId, colId, value, columnType, onChan
     }
 
     const handleChange = (newValue: string | number | User[]) => {
-        // console.log(`handleChange:newValue: ${newValue}`)
         onChange(rowId, colId, newValue)
     }
 
